@@ -8,9 +8,11 @@ class Program
     {
 
         string input = "";
-        Scripture scripture = new Scripture();
         Word word = new Word();
-        while (input != "quit")
+        Scripture scripture = new Scripture(word);
+        word.splitPassage = scripture.passage;
+
+        while (input != "quit" && scripture.hiddenWords != scripture.passage.Length)
         {
             word.DisplayWords();
             Console.WriteLine("\nPress enter to continue or type 'quit' to finish: ");

@@ -3,13 +3,13 @@ using ScriptureSystem;
 
 namespace WordSystem;
 public class Word
-{
-    static Scripture scripture = new Scripture();
-    public string[] passage = scripture.ProcessPassage();
+{    
     public bool hidden = false;
-    public bool IsHidden(int randomNumber)
+    public string[] splitPassage;
+    
+    public bool IsHidden(int word)
     {
-        if (passage[randomNumber] == "____")
+        if (splitPassage[word] == "____")
         {
             hidden = true;
         }
@@ -21,22 +21,22 @@ public class Word
     }
     public void WriteHiddenWord(int randomNumber)
     {
-        foreach (char letter in passage[randomNumber])
+        foreach (char letter in splitPassage[randomNumber])
             {
                 if (letter != '.' || letter != '!' || letter != '?' || 
                     letter != ',' || letter != ':' || letter != ';')
                 {
-                    passage[randomNumber] = "____";
+                    splitPassage[randomNumber] = "____";
                 }
                 else
                 {
-                    passage[randomNumber] += letter;
+                    splitPassage[randomNumber] += letter;
                 }
             }
     }
     public void DisplayWords()
     {
-        foreach(var item in passage)
+        foreach(var item in splitPassage)
             {
                 Console.Write(item.ToString() + " ");
             }

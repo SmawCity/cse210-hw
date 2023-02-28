@@ -5,12 +5,18 @@ using WordSystem;
 namespace ScriptureSystem;
 public class Scripture 
 {
-    static Reference reference = new Reference();
-    static Word word = new Word();
+    private Reference reference = new Reference();
+    private Word word;
     private string[] fullVerse = null;
+    public string[] passage;
     public int randomNumber = 0;
-    private int hiddenWords = 0;
+    public int hiddenWords = 0;
 
+    public Scripture(Word word1)
+    {
+        word = word1;
+        passage = ProcessPassage();
+    }
     public string[] ProcessPassage()
     {
         string fullPassage = "";
@@ -28,17 +34,17 @@ public class Scripture
     public int GetRandomWord()
     {
         Random random = new Random();
-        randomNumber = random.Next(word.passage.Length);
+        randomNumber = random.Next(passage.Length);
         return randomNumber;
     }
     public void HideWords() 
     {
         int numToHide = 3;    
-        if (word.passage.Length == hiddenWords)
+        if (passage.Length == hiddenWords)
         {
             return;
         }
-        else if (word.passage.Length - 3 <= hiddenWords)
+        else if (passage.Length - 3 <= hiddenWords)
         {
             numToHide = fullVerse.Length - hiddenWords;
         }
@@ -50,10 +56,11 @@ public class Scripture
             if (word.hidden == false)
             {
                 word.WriteHiddenWord(randomNumber);
+                hiddenWords +=1;
             }
             else
             {
-                hiddenWords += 1;
+                i = i - 1;
             }
         }
     }
