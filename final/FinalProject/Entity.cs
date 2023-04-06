@@ -6,9 +6,9 @@ public class Entity
     public string _entityType;
     public string _entityName;
     public int _entityHealth;
-    public List<string> _entityResistances;
-    public List<string> _entityVulnerabilities;
+    public bool _entityAlive = true;
 
+    //creates a new entity
     public void CreateEntity()
     {
         int choice = 0;
@@ -33,24 +33,17 @@ public class Entity
         Console.WriteLine($"How much health does [the] {_entityName} have?");
         _entityHealth = Convert.ToInt32(Console.ReadLine());
     }
+    // saves the entity and its traits to a txt file
     public void SaveEntity()
     {
         StreamWriter sw = new StreamWriter("entity.txt");
-        sw.WriteLine($"{_entityName}:{_entityHealth}:{_entityType}");
+        sw.WriteLine($"{_entityName}:{_entityHealth}:{_entityType}:{_entityAlive}:");
         sw.Close();
     }
-    public void EntityDeath()
+    // Checks the health of the entity to determine if it is alive
+    public virtual void EntityDeath()
     {
-
-    }
-    public void GetResistances()
-    {
-        Console.WriteLine("What damage types is this entity resistant to?");
-        Console.WriteLine("1. Bludgeoning | 2. Piercing | 3. Slashing |\n4. Acid | 5. Poison | 6. Fire |\n7. Cold | 8. Force | 9. Lightning |\n10. Thunder | 11. Necrotic | 12. Psychic | \n13. Radiant |");
-        
-    }
-    public void GetVulnerabilities()
-    {
-        
+        Console.WriteLine($"{_entityName} has died.");
+        _entityAlive = false;
     }
 }

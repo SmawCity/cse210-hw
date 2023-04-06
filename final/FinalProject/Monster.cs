@@ -6,8 +6,4 @@ public class Monster : Entity
     {
         _entityType = "Monster";
     }
-    public void EntityDeath()
-    {
-
-    }
 }

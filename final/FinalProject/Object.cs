@@ -6,8 +6,9 @@ public class Object : Entity
     {
         _entityType = "Object";
     }
-    public void EntityDeath()
+    public override void EntityDeath()
     {
-
+        Console.WriteLine($"The {_entityName} has been broken.");
+        _entityAlive = false;
     }
 }
